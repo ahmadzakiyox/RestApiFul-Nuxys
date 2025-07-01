@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyberspace API - Home</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="container">
+            <a href="#" class="logo">CyberAPI[<span class="blink">_</span>]</a>
+            <nav class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#pricing">Pricing</a>
+                <a href="/login" class="nav-button">Login</a>
+            </nav>
+            <div class="theme-switcher">
+                <i data-feather="sun" class="sun-icon"></i>
+                <label class="switch">
+                    <input type="checkbox" id="theme-toggle-checkbox">
+                    <span class="slider"></span>
+                </label>
+                <i data-feather="moon" class="moon-icon"></i>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <h1>Unlock the Web's Data</h1>
+                <p class="subtitle">Powerful & Reliable REST APIs for your projects. Scraping, utilities, and more.</p>
+                <a href="/register" class="cta-button">Get Your Free API Key</a>
+            </div>
+            <div class="hero-bg-glow"></div>
+        </section>
+
+        <section id="about" class="content-section">
+            <div class="container">
+                <h2>// What is CyberAPI?</h2>
+                <p>
+                    CyberAPI provides a robust suite of RESTful endpoints designed for developers and businesses. From simple data extraction with our scraping tools to useful utilities like IP lookups and countdowns, our goal is to provide a reliable and easy-to-use platform. Built on a scalable architecture, we ensure high availability and performance for both free and premium users.
+                </p>
+            </div>
+        </section>
+
+        <section id="pricing" class="content-section">
+            <div class="container">
+                <h2>// API Key Pricing</h2>
+                <div class="pricing-grid">
+                    <div class="pricing-card">
+                        <h3>Free Tier</h3>
+                        <p class="price">$0<span class="duration">/forever</span></p>
+                        <ul>
+                            <li><i data-feather="check-circle"></i> 1 API Key</li>
+                            <li><i data-feather="check-circle"></i> 10 Requests/Day</li>
+                            <li><i data-feather="x-circle" class="disabled"></i> Unlimited Access</li>
+                            <li><i data-feather="check-circle"></i> Community Support</li>
+                        </ul>
+                        <a href="/api/auth/register" class="card-button">Register Now</a>
+                    </div>
+                    <div class="pricing-card featured">
+                         <div class="featured-badge">PREMIUM</div>
+                        <h3>Pro Monthly</h3>
+                        <p class="price">$5<span class="duration">/month</span></p>
+                        <ul>
+                            <li><i data-feather="check-circle"></i> 1 Premium API Key</li>
+                            <li><i data-feather="check-circle"></i> Unlimited Requests</li>
+                            <li><i data-feather="check-circle"></i> Full Endpoint Access</li>
+                            <li><i data-feather="check-circle"></i> Priority Support</li>
+                        </ul>
+                         <a href="#" class="card-button">Choose Plan</a>
+                    </div>
+                    <div class="pricing-card">
+                        <h3>Pro Quarterly</h3>
+                        <p class="price">$12<span class="duration">/3 months</span></p>
+                         <ul>
+                            <li><i data-feather="check-circle"></i> 1 Premium API Key</li>
+                            <li><i data-feather="check-circle"></i> Unlimited Requests</li>
+                            <li><i data-feather="check-circle"></i> Full Endpoint Access</li>
+                            <li><i data-feather="check-circle"></i> Priority Support</li>
+                        </ul>
+                        <a href="#" class="card-button">Choose Plan</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="footer">
+        <p>&copy; 2025 CyberAPI. All rights reserved. System initiated by Gemini.</p>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+        feather.replace(); // Initialize Feather Icons
+    </script>
+</body>
+</html>

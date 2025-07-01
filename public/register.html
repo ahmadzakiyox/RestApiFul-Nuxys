@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - CyberAPI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <style>
+        /* --- General Setup & Theme --- */
+        :root {
+            --bg-color: #0d0d0d;
+            --primary-color: #00ff9d;
+            --secondary-color: #ff003c;
+            --text-color: #e0e0e0;
+            --heading-color: #ffffff;
+            --card-bg: #1a1a1a;
+            --border-color: #333;
+            --glow-color: rgba(0, 255, 157, 0.2);
+            --font-primary: 'Orbitron', sans-serif;
+            --font-secondary: 'Share Tech Mono', monospace;
+        }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-secondary);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        /* --- Auth Container --- */
+        .auth-container {
+            background-color: var(--card-bg);
+            padding: 40px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 0 30px var(--glow-color);
+            width: 100%;
+            max-width: 420px;
+            text-align: center;
+        }
+        .logo {
+            font-family: var(--font-primary);
+            font-size: 2.5em;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 700;
+            margin-bottom: 30px;
+            display: inline-block;
+        }
+        .logo .blink { animation: blink-caret 1s step-end infinite; }
+        @keyframes blink-caret { from, to { opacity: 1 } 50% { opacity: 0 } }
+        
+        /* --- Form Elements --- */
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            font-size: 0.9em;
+            color: var(--text-color);
+        }
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--bg-color);
+            border: 1px solid var(--border-color);
+            color: var(--heading-color);
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-family: var(--font-secondary);
+            font-size: 1em;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 10px var(--glow-color);
+        }
+
+        /* --- Button (Mirip .cta-button) --- */
+        .cta-button {
+            width: 100%;
+            background-color: var(--primary-color);
+            color: var(--bg-color);
+            padding: 15px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2em;
+            border: 2px solid var(--primary-color);
+            transition: all 0.3s;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .cta-button:hover {
+            background-color: transparent;
+            color: var(--primary-color);
+            box-shadow: 0 0 20px var(--primary-color);
+        }
+
+        .form-link {
+            text-align: center;
+            margin-top: 25px;
+        }
+        .form-link a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        #alert-message {
+            margin-bottom: 20px; padding: 10px; border-radius: 4px;
+            text-align: center; display: none;
+        }
+        #alert-message.success { background-color: #005235; color: #e0e0e0; }
+        #alert-message.error { background-color: #5c0015; color: #e0e0e0; }
+    </style>
+</head>
+<body>
+    <div class="auth-container">
+        <a href="/" class="logo">CyberAPI[<span class="blink">_</span>]</a>
+        <div id="alert-message"></div>
+        <form id="register-form">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" minlength="6" required>
+            </div>
+            <button type="submit" class="cta-button">Create Account</button>
+        </form>
+        <div class="form-link">
+            <p>Already have an account? <a href="/login">Login here</a></p>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('register-form');
+        const alertBox = document.getElementById('alert-message');
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            alertBox.style.display = 'none';
+            try {
+                const res = await fetch('/api/auth/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name: form.name.value, email: form.email.value, password: form.password.value })
+                });
+                const data = await res.json();
+                if (res.ok) {
+                    alertBox.className = 'success';
+                    alertBox.textContent = data.message;
+                    form.reset();
+                } else {
+                    alertBox.className = 'error';
+                    alertBox.textContent = data.message || 'Registration failed.';
+                }
+                alertBox.style.display = 'block';
+            } catch (err) {
+                alertBox.className = 'error';
+                alertBox.textContent = 'Connection error.';
+                alertBox.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>
